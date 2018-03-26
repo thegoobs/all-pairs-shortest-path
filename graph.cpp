@@ -6,7 +6,7 @@ cost_matrix generate_graph(int rows = 1, int columns = 1) {
 	for (int i = 0; i < rows; i++) {
 		g[i] = vector<int>(columns);
 		for (int j = 0; j < columns; j++) {
-			g[i][j] = 1;
+			g[i][j] = i == j ? 0 : rand() & 100;
 		}
 	}
 	return g;
@@ -46,7 +46,7 @@ void write_graph_to_file(string file_name, cost_matrix graph) {
 }
 
 cost_matrix read_graph_from_file(string file_name) {
-	cost_matrix graph = generate_graph();
+	cost_matrix graph;
 	string s;
 	//open file for reading and get stream buffer
 	ifstream fp(file_name, ios::in);
@@ -57,10 +57,9 @@ cost_matrix read_graph_from_file(string file_name) {
 		cin.rdbuf(fp.rdbuf());
 
 		while (getline(cin, s)) {
-			vector<int> row;
 			stringstream ss(s);
 
-			graph.push_back(vector<int>(1));
+			graph.push_back(vector<int>(0));
 
 			int value;
 			while (ss >> value) {
