@@ -28,7 +28,7 @@ void print_graph(cost_matrix graph) {
 
 void write_graph_to_file(string file_name, cost_matrix graph) {
 	//open file with ostream and get a backup of the cout buffer
-	ofstream fp(file_name, ios::out);
+	ofstream fp(file_name, ofstream::out);
 	streambuf* backup = cout.rdbuf();
 
 	//if the file is opened
@@ -49,7 +49,7 @@ cost_matrix read_graph_from_file(string file_name) {
 	cost_matrix graph;
 	string s;
 	//open file for reading and get stream buffer
-	ifstream fp(file_name, ios::in);
+	ifstream fp(file_name, ifstream::in);
 	streambuf* backup = cin.rdbuf();
 	int i = 0, j = 0;
 

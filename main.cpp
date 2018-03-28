@@ -12,6 +12,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	srand(time(NULL));
 	int size = rand() % 20;
+
 	cost_matrix g = generate_graph(size, size);
 	print_graph(g);
 
