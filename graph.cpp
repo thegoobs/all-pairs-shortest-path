@@ -1,12 +1,25 @@
-typedef vector<vector <int> > cost_matrix; //nifty way to not type vector so many times
+using namespace std;
 
-cost_matrix generate_graph(int rows = 1, int columns = 1) {
-	cost_matrix g(columns);
+typedef vector<vector <int> > cost_matrix; //nifty way to not type vector so many times
+//function prototypes
+cost_matrix generate_graph(int, int, bool);
+void print_graph(cost_matrix);
+void write_graph_to_file(string, cost_matrix);
+cost_matrix read_graph_from_file(string);
+
+cost_matrix generate_graph(int rows = 1, int columns = 1, bool random = true) {
+	cost_matrix g(rows);
 
 	for (int i = 0; i < rows; i++) {
 		g[i] = vector<int>(columns);
 		for (int j = 0; j < columns; j++) {
-			g[i][j] = i == j ? 0 : rand() & 100;
+			if (random) {
+				g[i][j] = i == j ? 0 : rand() % 100;
+			}
+
+			else {
+				g[i][j] = 0;
+			}
 		}
 	}
 	return g;
@@ -51,7 +64,7 @@ cost_matrix read_graph_from_file(string file_name) {
 	//open file for reading and get stream buffer
 	ifstream fp(file_name, ifstream::in);
 	streambuf* backup = cin.rdbuf();
-	int i = 0, j = 0;
+	int i = 0;
 
 	if (fp.is_open()) {
 		cin.rdbuf(fp.rdbuf());
