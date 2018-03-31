@@ -81,9 +81,14 @@ cost_matrix read_graph_from_file(string file_name) {
 			}
 			i++;
 		}
+
+		cin.rdbuf(backup);
+		fp.close();
+		return graph;
 	}
 
-	cin.rdbuf(backup);
-	fp.close();
-	return graph;
+	else {
+		cout << "ERROR: File not found\n";
+		exit(1);
+	}
 }

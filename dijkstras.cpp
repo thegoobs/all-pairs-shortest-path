@@ -51,19 +51,15 @@ cost_matrix dijkstras(cost_matrix cm) {
 	for (int i = 0; i < cm.size(); i++) {
 		start = i; //start node
 
-		//initialie matrix
-		for (int i = 0; i < cm.size(); i++) {
-			visited_nodes[i] = false;
-			distance[i] = -1;
-		}
 
 		// DIJKSTRA'S FOR PAIR STARTS HERE
 		//initialize algorithm for this pair start
 		for (int i = 0; i < cm.size(); i++) {
+			visited_nodes[i] = false;
 			distance[i] = cm[start][i];
 		}
 
-		visited_nodes[i] = true; //visit start node
+		visited_nodes[start] = true; //visit start node
 		distance[i] = 0; //can't go to self
 
 		//loop until end node is visited
@@ -71,6 +67,7 @@ cost_matrix dijkstras(cost_matrix cm) {
 			minimum = find_minimum(distance, visited_nodes);
 			visited_nodes[minimum] = true;
 
+			//
 			for (int i = 0; i < cm.size(); i++) {
 				if (visited_nodes[i] == false && distance[i] > distance[minimum] + cm[minimum][i]) {
 					distance[i] = distance[minimum] + cm[minimum][i];
