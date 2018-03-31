@@ -13,6 +13,19 @@ inline bool all_visited(bool* visited_nodes) {
 	return true;
 }
 
+inline int find_minimum(int* distance, bool* visited) {
+	int min = -1;
+	int min_index = -1;
+	for (int i = 0; i < sizeof(distance) / sizeof(int); i++) {
+		if ((min > distance[i] || min == -1) && visited[i] == false) {
+			min = distance[i];
+			min_index = i;
+		}
+	}
+
+	return min_index;
+}
+
 //function that puts array into vector given the size of the array
 inline vector<int> push_result(int* result_array, int size) {
 	vector<int> resulting_vector;
@@ -30,35 +43,43 @@ cost_matrix dijkstras(cost_matrix cm) {
 	//initialize array to store visited nodes
 	//if a node is visited, visited_node[node] = true
 	bool visited_nodes[cm.size()];
-	for (int i = 0; i < cm.size(); i++) {
-		visited_nodes[i] = false;
-	}
 
 	//initialize an array that holds the distance from visited nodes
 	//if array cannot be visited (no edge connects) then distance = -1
 	int distance[cm.size()];
-	int start, end;
+	int start, end, minimum;
 	for (int i = 0; i < cm.size(); i++) {
 		start = i; //start node
 
+		//initialie matrix
+		for (int i = 0; i < cm.size(); i++) {
+			visited_nodes[i] = false;
+			distance[i] = -1;
+		}
+
 		// DIJKSTRA'S FOR PAIR STARTS HERE
-		//initialize algorithm for this pair start, end
+		//initialize algorithm for this pair start
+		for (int i = 0; i < cm.size(); i++) {
+			distance[i] = cm[start][i];
+		}
+
 		visited_nodes[i] = true; //visit start node
+		distance[i] = 0; //can't go to self
 
 		//loop until end node is visited
 		while (!all_visited(visited_nodes)) {
-			break;
+			minimum = find_minimum(distance, visited_nodes);
+			visited_nodes[minimum] = true;
+
+			for (int i = 0; i < cm.size(); i++) {
+				if (visited_nodes[i] == false && distance[i] > distance[minimum] + cm[minimum][i]) {
+					distance[i] = distance[minimum] + cm[minimum][i];
+				}
+			}
 		}
 
 		//DIJKSTRA'S FOR PAIR ENDS HERE
 		//done with dijkstra's for this pair, move on
-		// push_result(result[start], distance);
-
-		//reset variables for next pair
-		for (int i = 0; i < cm.size(); i++) {
-			visited_nodes[i] = false;
-			distance[i] = 3;
-		}
 		result[start] = push_result(distance, cm.size());
 	}
 

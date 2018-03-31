@@ -1,3 +1,4 @@
+#define MAX_VAL 100
 using namespace std;
 
 typedef vector<vector <int> > cost_matrix; //nifty way to not type vector so many times
@@ -14,7 +15,7 @@ cost_matrix generate_graph(int rows = 1, int columns = 1, bool random = true) {
 		g[i] = vector<int>(columns);
 		for (int j = 0; j < columns; j++) {
 			if (random) {
-				g[i][j] = i == j ? 0 : rand() % 100;
+				g[i][j] = i == j ? 0 : rand() % MAX_VAL + 1;
 			}
 
 			else {
