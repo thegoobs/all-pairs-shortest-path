@@ -38,7 +38,6 @@ inline vector<int> push_result(int* result_array, int size) {
 }
 
 cost_matrix dijkstras(cost_matrix cm) {
-	int ctr = 0;
 	//initialize cost matrix to store all pairs shortest path values
 	cost_matrix result = generate_graph(cm.size(), false);
 

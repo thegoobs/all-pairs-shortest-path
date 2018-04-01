@@ -3,7 +3,6 @@ using namespace std;
 cost_matrix floydwarshall(cost_matrix);
 
 cost_matrix floydwarshall(cost_matrix c) {
-	t = clock();
 	cost_matrix A = c; //generate matrix to return, starts as cost matrix
 	for (int k = 0; k < c.size(); k++) {
 		for (int i = 0; i < c.size(); i++) {
@@ -12,7 +11,6 @@ cost_matrix floydwarshall(cost_matrix c) {
 			}
 		}
 	}
-
-	t = clock() - t;
+	
 	return A;
 }
