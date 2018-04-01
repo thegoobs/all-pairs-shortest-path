@@ -3,17 +3,17 @@ using namespace std;
 
 typedef vector<vector <int> > cost_matrix; //nifty way to not type vector so many times
 //function prototypes
-cost_matrix generate_graph(int, int, bool);
+cost_matrix generate_graph(int, bool);
 void print_graph(cost_matrix);
 void write_graph_to_file(string, cost_matrix);
 cost_matrix read_graph_from_file(string);
 
-cost_matrix generate_graph(int rows = 1, int columns = 1, bool random = true) {
-	cost_matrix g(rows);
+cost_matrix generate_graph(int size = 1, bool random = true) {
+	cost_matrix g(size);
 
-	for (int i = 0; i < rows; i++) {
-		g[i] = vector<int>(columns);
-		for (int j = 0; j < columns; j++) {
+	for (int i = 0; i < size; i++) {
+		g[i] = vector<int>(size);
+		for (int j = 0; j < size; j++) {
 			if (random) {
 				g[i][j] = i == j ? 0 : rand() % MAX_VAL + 1;
 			}
@@ -28,10 +28,9 @@ cost_matrix generate_graph(int rows = 1, int columns = 1, bool random = true) {
 
 void print_graph(cost_matrix graph) {
 	//get dimensions
-	int rows = graph.size();
-	int columns = graph[0].size();
-	for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < columns; j++) {
+	int size = graph.size();
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
 			cout << graph[i][j] << " ";
 		}
 		cout << endl;
