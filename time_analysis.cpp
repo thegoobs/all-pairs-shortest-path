@@ -5,7 +5,7 @@
 using namespace std;
 
 
-void write_to_file(float* arr_d, float* arr_f, int size) {
+void write_to_file(float* arr_d, float* arr_f, int* arr_size) {
 	//open file with ostream and get a backup of the cout buffer
 	ofstream fp("time_output.txt", ofstream::out);
 	streambuf* backup = cout.rdbuf();
@@ -18,7 +18,7 @@ void write_to_file(float* arr_d, float* arr_f, int size) {
 		cout << "SIZE:\tDIJKSTRA'S:\tFLOYD:" << endl <<
 				"-----\t-----------\t------" << endl;
 		for (int i = 0; i < NUM_ITER; i++) {
-			cout << size << "\t\t" << arr_d[i] << "\t\t" << arr_f[i] << endl;
+			cout << arr_size[i] << "\t\t" << arr_d[i] << "\t\t" << arr_f[i] << endl;
 		}
 	}
 
@@ -35,6 +35,7 @@ int main() {
 
 	float f_d[NUM_ITER];
 	float f_f[NUM_ITER];
+	int arr_size[NUM_ITER];
 
 	//random seed
 	srand(time(NULL));
@@ -58,8 +59,9 @@ int main() {
 
 		f_d[i] = time_in_mil(t_d);
 		f_f[i] = time_in_mil(t_f);
+		arr_size[i] = size;
 	}
 
-	write_to_file(f_d, f_f, size);
+	write_to_file(f_d, f_f, arr_size);
 	return 0;
 }

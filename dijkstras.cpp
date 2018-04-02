@@ -1,3 +1,4 @@
+#define MAX_INT  2147483647
 using namespace std;
 
 inline bool all_visited(bool*);
@@ -16,7 +17,7 @@ inline bool all_visited(bool* visited_nodes, int size) {
 }
 
 inline int find_minimum(int* distance, bool* visited, int size) {
-	int min = INT_MAX;
+	int min = MAX_INT;
 	int min_index = -1;
 	for (int i = 0; i < size; i++) {
 		if (min > distance[i] && visited[i] == false) {

@@ -8,7 +8,8 @@ elif [[ $1 == "-t" ]]; then
 	g++ time_analysis.cpp -std=c++11 -o time_analysis.exe
 	./time_analysis.exe
 else
-	echo "Running time analysis program."
 	g++ main.cpp -std=c++11 -o file_test.exe
 	./file_test.exe $1
 fi
+
+rm *.exe
